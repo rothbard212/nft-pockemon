@@ -13,13 +13,13 @@ contract PokeDio is ERC721, Ownable {
         string name;
         uint level;
         string img;
-        uint experience;  // Experiência para aumentar de nível
-        uint lastBattle;  // Registro do último tempo de batalha (para cooldown)
+        uint experience;  
+        uint lastBattle;  
     }
 
     Pokemon[] public pokemons;
     address public gameOwner;
-    uint public battleCooldown = 1 days;  // Definindo um cooldown de 24 horas entre batalhas
+    uint public battleCooldown = 1 days;  
     Counters.Counter private _pokemonIdCounter;
 
     event NewPokemonCreated(uint pokemonId, string name, address owner);
@@ -43,7 +43,7 @@ contract PokeDio is ERC721, Ownable {
     
     function createNewPokemon(string memory _name, address _to, string memory _img) public onlyOwner {
         uint pokemonId = _pokemonIdCounter.current();
-        pokemons.push(Pokemon(_name, 1, _img, 0, block.timestamp));  // Inicialmente o Pokemon começa com 0 de experiência
+        pokemons.push(Pokemon(_name, 1, _img, 0, block.timestamp));  
         _safeMint(_to, pokemonId);
         _pokemonIdCounter.increment();
         emit NewPokemonCreated(pokemonId, _name, _to);
@@ -103,7 +103,7 @@ contract PokeDio is ERC721, Ownable {
         _transfer(seller, msg.sender, _pokemonId);
         pokemonPrices[_pokemonId] = 0;
 
-        payable(seller).transfer(msg.value);  // Enviar pagamento ao vendedor
+        payable(seller).transfer(msg.value);  
     }
 
     
